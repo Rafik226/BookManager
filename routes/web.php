@@ -9,12 +9,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/produits-liste', [ProduitController::class, 'afficherProduits']);
+Route::get('/livre-liste', [LivreController::class, 'afficherlivres']);
 
 
 Route::get('/livres', function () {
     $livres = Livre::all();
     return view('livres', compact('livres'));
-});
+})->name('livres');
 
 Route::get('/livres/create', [LivreController::class, 'create'])->name('livres.create');
+Route::post('/livres/store', [LivreController::class, 'store'])->name('livres.store');
