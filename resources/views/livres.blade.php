@@ -15,6 +15,7 @@
                     <th>Titre</th>
                     <th>Auteur</th>
                     <th>Année de Publication</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,16 @@
                         <td>{{ $livre->titre }}</td>
                         <td>{{ $livre->auteur }}</td>
                         <td>{{ $livre->annee_publication }}</td>
+                        <td>
+                            <a href="{{ route('livres.edit', $livre->id) }}" class="btn btn-primary btn-sm">Modifier</a>
+                            <form action="{{ route('livres.destroy', $livre->id) }}" method="POST"
+                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        </td>
+
                     </tr>
                 @endforeach
             </tbody>

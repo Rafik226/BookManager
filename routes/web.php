@@ -19,3 +19,6 @@ Route::get('/livres', function () {
 
 Route::get('/livres/create', [LivreController::class, 'create'])->name('livres.create');
 Route::post('/livres/store', [LivreController::class, 'store'])->name('livres.store');
+Route::get('/livres/{id}/edit', [LivreController::class, 'edit'])->name('livres.edit');
+Route::put('/livres/{id}', [LivreController::class, 'update'])->name('livres.update');
+Route::delete('/livres/{id}', [LivreController::class, 'destroy'])->name('livres.destroy');
