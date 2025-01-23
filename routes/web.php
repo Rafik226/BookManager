@@ -9,14 +9,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/livre-liste', [LivreController::class, 'afficherlivres']);
 
-
-Route::get('/livres', function () {
-    $livres = Livre::all();
-    return view('livres', compact('livres'));
-})->name('livres');
-
+Route::get('/livres', [LivreController::class, 'index'])->name('livres');
 Route::get('/livres/create', [LivreController::class, 'create'])->name('livres.create');
 Route::post('/livres/store', [LivreController::class, 'store'])->name('livres.store');
 Route::get('/livres/{id}/edit', [LivreController::class, 'edit'])->name('livres.edit');
