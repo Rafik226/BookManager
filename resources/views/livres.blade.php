@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+@if(auth()->user()->hasRole('admin'))
+    <p>Bienvenue, Administrateur !</p>
+@endif
+
+@if(auth()->user()->can('manage books'))
+    <a href="{{ route('books.create') }}">Ajouter un livre</a>
+@endif
+
 @if ($livres->isEmpty())
     <div class="alert alert-warning">
         Aucun livre ne correspond à votre recherche.
@@ -14,17 +22,13 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-8">
-    <form action="{{ route('livres') }}" method="GET" class="mb-4">
-    <div class="input-group">
-        <input 
-            type="text" 
-            name="search" 
-            class="form-control" 
-            placeholder="Rechercher un livre..." 
-            value="{{ request('search') }}">
-        <button type="submit" class="btn btn-primary">Rechercher</button>
-    </div>
-</form>
+        <form action="{{ route('livres') }}" method="GET" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Rechercher un livre..."
+                    value="{{ request('search') }}">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </form>
         <table class="table table-striped">
             <thead>
                 <tr>
